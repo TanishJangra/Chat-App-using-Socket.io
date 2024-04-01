@@ -1,0 +1,73 @@
+.RegisterCont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
+
+.RegisterFormContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: rgb(178, 195, 220); */
+    padding: 10px 30px 20px 30px;
+    border-radius: 10px;
+    gap: 20px;
+    box-shadow: 0px 0px 0px 4px rgb(225, 227, 230);
+    /* height: 50%; */
+    color: white;
+}
+
+.RegisterFormFields{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.RegisterBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.registerFormInpFields input{
+    padding: 4px 8px;
+    font-size: 20px;
+    border-radius: 6px;
+    border:none;
+    margin: 4px;
+}
+
+.RegisterBtn button{
+    padding: 6px 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(71, 71, 161);
+    color: white;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.redirectToLogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.redirectToLogin button{
+    background: none;
+    color: green;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
