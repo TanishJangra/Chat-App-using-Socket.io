@@ -1,0 +1,15 @@
+.chatContainer{
+    background-color: #000000;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatContainerInnerDiv{
+    background-color: gray;
+    width: 95vw;
+    height: 95vh;
+}

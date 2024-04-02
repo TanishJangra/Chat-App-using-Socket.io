@@ -1,0 +1,10 @@
+.contactsContainer{
+    width: 240px;
+    background-color: red;
+    height: 100%;
+}
+
+.contactsDiv{
+    width: 100%;
+    background-color: rgb(138, 191, 154);
+}
