@@ -1,0 +1,59 @@
+.chatContainerSelected{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.Header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(18, 36, 75);
+    /* padding: 20px; */
+    position: relative;
+}
+
+.Header .username{
+    font-size: 24px;
+}
+
+.chatMessages{
+    height: 76%;
+    background-color: rgb(37, 89, 26);
+}
+
+.chatInput{
+    background-color: rgb(22, 19, 62);
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+.inputMessageBox{
+    height: 90%;
+    width: 80%;
+    font-size: 24px;
+    padding: 10px 25px;
+    border-radius: 20px;
+}
+
+.logoutBtn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 4px 10px;
+    border: 1px solid white;
+    border-radius: 6px;
+}
+
+.sendMssgIcon{
+    margin-top: 3px !important;
+    width: 50px !important;
+    height: 50px !important;
+    /* color: black; */
+}

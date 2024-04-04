@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Contacts.css";
 import img from "./../../assets/meetme.png";
 
-const Contacts = ({ contacts, currentUser }) => {
+const Contacts = ({ contacts, currentUser, changeChat }) => {
   console.log("contacts details are: ", contacts);
 
   const [currentUsername, setCurrentUsername] = useState(undefined);
@@ -13,10 +13,17 @@ const Contacts = ({ contacts, currentUser }) => {
     if (currentUser) {
       setCurrentUserImage(currentUser.avatarImage);
       setCurrentUsername(currentUser.username);
+      console.log(
+        "currentUserinsideUsefffect>......................",
+        currentUser
+      );
     }
   }, [currentUser]);
-  console.log("avatarImage is:::::::::::", currentUserImage);
-  const changeCurrentChat = (ind, contact) => {};
+  // console.log("avatarImage is:::::::::::", currentUserImage);
+  const changeCurrentChat = (ind, contact) => {
+    setCurrentSelected(ind);
+    changeChat(contact);
+  };
 
   return (
     <>
@@ -33,6 +40,7 @@ const Contacts = ({ contacts, currentUser }) => {
                 className={`contactsDiv ${
                   ind === currentSelected ? "selected" : ""
                 }`}
+                onClick={() => changeCurrentChat(ind, item)}
               >
                 <img
                   src={`data:image/svg+xml;utf8,${encodeURIComponent(
