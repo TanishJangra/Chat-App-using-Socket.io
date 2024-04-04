@@ -1,10 +1,56 @@
 .contactsContainer{
     width: 240px;
-    background-color: red;
+    background-color: rgb(31, 51, 121);
     height: 100%;
+    position: relative;
+    overflow-y: scroll;
+}
+
+.contactsDivContainer{
+    flex: 1;
+    height: auto;
+    background-color: rgb(22, 48, 95);
 }
 
 .contactsDiv{
     width: 100%;
-    background-color: rgb(138, 191, 154);
+    background-color: rgb(75, 118, 205);
+    /* padding: 10px; */
+    border: 1px solid black;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.contactHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 80px;
+}
+
+.logoImg{
+    height: 3rem;
+}
+
+.contactItemUsername{
+    font-size: 24px;
+}
+
+.current-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(120, 135, 193);
+    width: 240px;
+}
+
+.usersImg{
+    width: 40px;
 }
