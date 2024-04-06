@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ChatContainer.css";
 import Logout from "../Logout/Logout";
 import { useNavigate } from "react-router-dom";
 import SendIcon from '@mui/icons-material/Send';
 import ChatInput from "../ChatInput/ChatInput";
 import Messages from "../Messages/Messages";
+import axios from 'axios';
+import { getAllMessagesRoute, sendMssgRoute } from "../../utils/APIRoutes";
 
-const ChatContainer = ({ currentChat }) => {
+const ChatContainer = ({ currentChat, currentUser }) => {
 
     const navigate = useNavigate();
+    const [messages, setMessages] = useState([]);
+
+
+    const fetchData = async () => {
+      const response = await axios.post(getAllMessagesRoute,{
+        from: currentUser._id,
+        to: currentChat._id
+      })
+      console.log("response of messages are:", response);
+      setMessages(response.data);
+    }
+
+    useEffect(()=>{
+      fetchData();
+    },[currentChat])
 
     const handleSendMessage = async (mssg) => {
-      alert(mssg);
+      // alert(mssg);
+      await axios.post(sendMssgRoute, {
+        from: currentUser._id,
+        to: currentChat._id,
+        message: mssg
+      })
     }
 
     const handleLogout = () => {
@@ -38,7 +60,23 @@ const ChatContainer = ({ currentChat }) => {
             </div>
             <div className="logoutBtn" onClick={handleLogout}>Logout</div>
           </div>
-          <Messages/>
+          <div className="chat-messages">
+        {messages.map((message) => {
+          return (
+            <div >
+              <div
+                className={`message ${
+                  message.fromSelf ? "sended" : "recieved"
+                }`}
+              >
+                <div className="content ">
+                  <p>{message.message}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
           <ChatInput handleSendMessage={handleSendMessage}/>
         </div>
       )}
