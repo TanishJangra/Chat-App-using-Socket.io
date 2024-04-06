@@ -1,0 +1,117 @@
+.chatInput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+.chatInput .emoji{
+    font-size: 40px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.EmojiPicker{
+    position: absolute !important;
+    bottom: 87px !important;
+    left: 20px !important;
+    height: 450px !important;
+    width: 350px !important;
+    background-color: black !important;
+    box-shadow: 0 5px 10px #9a86f3 !important;
+    border-color: #9186f3;
+}
+
+.emoji-picker-react {
+    position: absolute !important;
+    top: -350px !important;
+    background-color: #080420 !important;
+    box-shadow: 0 5px 10px #9a86f3 !important;
+    border-color: #9a86f3 !important;
+    .emoji-scroll-wrapper::-webkit-scrollbar {
+      background-color: #080420 !important;
+      width: 5px !important;
+      &-thumb {
+        background-color: #9a86f3 !important;
+      }
+    }
+    .emoji-categories {
+      button {
+        filter: contrast(0) !important;
+      } 
+    }
+    .emoji-search {
+      background-color: transparent !important;
+      border-color: #9a86f3 !important;
+    }
+    .emoji-group:before {
+      background-color: #080420 !important;
+    }
+
+    .epr-search-container{
+        background-color: #080420 !important;
+    }
+  }
+
+  .inputForm{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    margin-left: 30px;
+  }
+
+  .chatInput{
+    background-color: #16133e;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 20px 20px 20px 120px;
+    gap: 10px
+}
+
+.inputMessageBox{
+    height: 90%;
+    width: 80%;
+    font-size: 24px;
+    padding: 10px 25px;
+    border-radius: 20px 0px 0px 20px;
+    border-collapse: collapse;
+    border-right: 0;
+}
+
+.logoutBtn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 4px 10px;
+    border: 1px solid white;
+    border-radius: 6px;
+}
+
+.sendMssgIcon{
+    margin-top: 3px !important;
+    width: 50px !important;
+    height: 50px !important;
+    color: black !important;
+}
+
+.formBtn{
+    /* background-color: #16133e; */
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7%;
+    height: 90%;
+    padding: 4px 0px 4px 4px;
+    border-collapse: collapse;
+    background-color: white;
+    border-left: 0;
+    border-radius: 0px 20px 20px 0px;
+}

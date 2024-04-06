@@ -3,10 +3,16 @@ import "./ChatContainer.css";
 import Logout from "../Logout/Logout";
 import { useNavigate } from "react-router-dom";
 import SendIcon from '@mui/icons-material/Send';
+import ChatInput from "../ChatInput/ChatInput";
+import Messages from "../Messages/Messages";
 
 const ChatContainer = ({ currentChat }) => {
 
     const navigate = useNavigate();
+
+    const handleSendMessage = async (mssg) => {
+      alert(mssg);
+    }
 
     const handleLogout = () => {
         localStorage.clear();
@@ -32,15 +38,8 @@ const ChatContainer = ({ currentChat }) => {
             </div>
             <div className="logoutBtn" onClick={handleLogout}>Logout</div>
           </div>
-          <div className="chatMessages">Messages</div>
-          <div className="chatInput">
-            <input
-              type="text"
-              placeholder="Type a Message"
-              className="inputMessageBox"
-            />
-            <SendIcon className="sendMssgIcon"/>
-          </div>
+          <Messages/>
+          <ChatInput handleSendMessage={handleSendMessage}/>
         </div>
       )}
     </>
