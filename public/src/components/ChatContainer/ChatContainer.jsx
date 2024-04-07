@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import MenuIcon from "@mui/icons-material/Menu";
 import Contacts from "../Contacts/Contacts";
 
-const ChatContainer = ({ currentChat, currentUser, socket, isSmallScreen }) => {
+const ChatContainer = ({ currentChat, currentUser, socket, isMobileScreen }) => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [arrivalMsg, setArrivalMsg] = useState(null);
@@ -82,9 +82,6 @@ const ChatContainer = ({ currentChat, currentUser, socket, isSmallScreen }) => {
           showContacts && <Contacts/>
         }
           <div className="Header">
-            {isSmallScreen && (
-              <MenuIcon className="menuIcon" onClick={handleMenuIconClick} />
-            )}
             <div className="avatar">
               <img
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(
@@ -94,9 +91,9 @@ const ChatContainer = ({ currentChat, currentUser, socket, isSmallScreen }) => {
                 className="usersImg"
               />
             </div>
-            <div className="username">
+            {!isMobileScreen && <div className="username">
               {currentChat ? currentChat.username : ""}
-            </div>
+            </div>}
             <div className="logoutBtn" onClick={handleLogout}>
               Logout
             </div>
@@ -118,7 +115,7 @@ const ChatContainer = ({ currentChat, currentUser, socket, isSmallScreen }) => {
               );
             })}
           </div>
-          <ChatInput handleSendMessage={handleSendMessage} />
+          <ChatInput handleSendMessage={handleSendMessage} isMobileScreen={isMobileScreen}/>
         </div>
       )}
     </>

@@ -9,7 +9,7 @@
 .hamburgerContactsContainer{
     position: absolute;
     z-index: 99;
-    width: 400px;
+    width: 280px;
     height: 100%;
     overflow-y: scroll;
     background-color: rgb(31, 51, 121);
@@ -89,3 +89,14 @@
 .usersImg{
     width: 40px;
 }
+
+@media (max-width:1080px){
+    .current-user{
+        width: 280px;
+    }
+    .chatsContact{
+        max-height: 75vh;
+        padding-top: 285px;
+    }
+  
+  }

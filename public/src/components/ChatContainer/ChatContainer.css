@@ -113,3 +113,19 @@
     left: 20px;
     font-size: 50px !important;
   } */
+
+  @media (max-width: 1080px){
+    .logoutBtn{
+      position: absolute;
+      right: 12px !important;
+      top: 16px !important;
+      font-size: 14px !important;
+      cursor: pointer;
+      padding: 4px 10px;
+      border: none !important;
+      border-radius: 0 !important;
+    }
+    .Header{
+      height: 65px;
+    }
+  }

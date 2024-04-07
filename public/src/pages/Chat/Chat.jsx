@@ -61,8 +61,8 @@ const Chat = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileScreen(window.innerWidth <= 768);
-      setIsSmallScreen(window.innerWidth <= 768);
+      setIsMobileScreen(window.innerWidth <= 1080);
+      setIsSmallScreen(window.innerWidth <= 1080);
       console.log("mobilescreen...........", isMobileScreen);
     };
     window.addEventListener("resize", handleResize);
@@ -104,6 +104,7 @@ const Chat = () => {
             currentChat={currentChat}
             currentUser={currentUser}
             socket={socket}
+            isMobileScreen = {isMobileScreen}
           />
         )}
       </div>
