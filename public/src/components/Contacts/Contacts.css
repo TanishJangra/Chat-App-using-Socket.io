@@ -6,6 +6,15 @@
     overflow-y: scroll;
 }
 
+.hamburgerContactsContainer{
+    position: absolute;
+    z-index: 99;
+    width: 400px;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: rgb(31, 51, 121);
+}
+
 .contactsDivContainer{
     flex: 1;
     height: auto;

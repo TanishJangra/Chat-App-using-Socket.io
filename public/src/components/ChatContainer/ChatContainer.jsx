@@ -4,12 +4,16 @@ import { useNavigate } from "react-router-dom";
 import ChatInput from "../ChatInput/ChatInput";
 import axios from "axios";
 import { getAllMessagesRoute, sendMssgRoute } from "../../utils/APIRoutes";
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import MenuIcon from "@mui/icons-material/Menu";
+import Contacts from "../Contacts/Contacts";
 
-const ChatContainer = ({ currentChat, currentUser, socket }) => {
+const ChatContainer = ({ currentChat, currentUser, socket, isSmallScreen }) => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [arrivalMsg, setArrivalMsg] = useState(null);
+  const [showContacts, setShowContacts] = useState(false);
+  
   const scrollRef = useRef();
 
   const fetchData = async () => {
@@ -66,11 +70,21 @@ const ChatContainer = ({ currentChat, currentUser, socket }) => {
     navigate("/login");
   };
 
+  const handleMenuIconClick = () => {
+    showContacts(true);
+  };
+
   return (
     <>
       {currentChat && (
         <div className="chatContainerSelected">
+        {
+          showContacts && <Contacts/>
+        }
           <div className="Header">
+            {isSmallScreen && (
+              <MenuIcon className="menuIcon" onClick={handleMenuIconClick} />
+            )}
             <div className="avatar">
               <img
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(

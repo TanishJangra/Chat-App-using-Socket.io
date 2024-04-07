@@ -13,4 +13,13 @@
     width: 95vw;
     height: 95vh;
     display: flex;
+    position: relative;
+}
+
+.MenuIconContacts{
+    position: absolute;
+    left: 30px;
+    top: 48px;
+    font-size: 40px !important;
+    z-index: 6;
 }
