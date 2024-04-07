@@ -1,18 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { allUsersRoute } from "../../utils/APIRoutes";
+import { allUsersRoute, host } from "../../utils/APIRoutes";
 import Contacts from "../../components/Contacts/Contacts";
 import "./Chat.css";
 import Welcome from "./../../components/Welcome/Welcome";
 import ChatContainer from "../../components/ChatContainer/ChatContainer";
+import {io} from "socket.io-client";
+
 
 const Chat = () => {
+
+  const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem("chat-app-user")) {
+      navigate("/login");
+    } else {
+      setData();
+      setIsLoaded(true);
+    }
+  }, []);
+
+  useEffect(()=>{
+    if(currentUser){
+      socket.current = io(host);
+      socket.current.emit("add-user", currentUser._id);
+    }
+  },[currentUser]);
+
+  useEffect(() => {
+    fetchData();
+  }, [currentUser]);
 
   const fetchData = async () => {
     if (currentUser) {
@@ -29,18 +53,6 @@ const Chat = () => {
     setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
   };
 
-  useEffect(() => {
-    if (!localStorage.getItem("chat-app-user")) {
-      navigate("/login");
-    } else {
-      setData();
-      setIsLoaded(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [currentUser]);
 
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
@@ -57,7 +69,7 @@ const Chat = () => {
         { isLoaded && currentChat === undefined ? (
           <Welcome currentUser={currentUser} />
         ) : (
-          <ChatContainer currentChat={currentChat} currentUser={currentUser} />
+          <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket}/>
         )}
       </div>
     </div>

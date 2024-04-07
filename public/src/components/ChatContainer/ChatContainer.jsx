@@ -1,45 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ChatContainer.css";
-import Logout from "../Logout/Logout";
 import { useNavigate } from "react-router-dom";
-import SendIcon from '@mui/icons-material/Send';
 import ChatInput from "../ChatInput/ChatInput";
-import Messages from "../Messages/Messages";
-import axios from 'axios';
+import axios from "axios";
 import { getAllMessagesRoute, sendMssgRoute } from "../../utils/APIRoutes";
+import {v4 as uuidv4} from 'uuid';
 
-const ChatContainer = ({ currentChat, currentUser }) => {
+const ChatContainer = ({ currentChat, currentUser, socket }) => {
+  const navigate = useNavigate();
+  const [messages, setMessages] = useState([]);
+  const [arrivalMsg, setArrivalMsg] = useState(null);
+  const scrollRef = useRef();
 
-    const navigate = useNavigate();
-    const [messages, setMessages] = useState([]);
-
-
-    const fetchData = async () => {
-      const response = await axios.post(getAllMessagesRoute,{
+  const fetchData = async () => {
+    if (currentChat) {
+      const response = await axios.post(getAllMessagesRoute, {
         from: currentUser._id,
-        to: currentChat._id
-      })
+        to: currentChat._id,
+      });
       console.log("response of messages are:", response);
       setMessages(response.data);
     }
+  };
 
-    useEffect(()=>{
-      fetchData();
-    },[currentChat])
+  useEffect(() => {
+    fetchData();
+  }, [currentChat]);
 
-    const handleSendMessage = async (mssg) => {
-      // alert(mssg);
-      await axios.post(sendMssgRoute, {
-        from: currentUser._id,
-        to: currentChat._id,
-        message: mssg
-      })
+  const handleSendMessage = async (mssg) => {
+    // alert(mssg);
+    await axios.post(sendMssgRoute, {
+      from: currentUser._id,
+      to: currentChat._id,
+      message: mssg,
+    });
+    socket.current.emit("send-msg", {
+      to: currentChat._id,
+      from: currentUser._id,
+      message: mssg,
+    });
+
+    const mssgs = [...messages];
+    mssgs.push({ fromSelf: true, message: mssg });
+    setMessages(mssgs);
+  };
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-receive", (msg) => {
+        setArrivalMsg({ fromSelf: false, message: msg });
+      });
     }
+  }, []);
 
-    const handleLogout = () => {
-        localStorage.clear();
-        navigate('/login');
-    }
+  useEffect(() => {
+    arrivalMsg && setMessages((prev) => [...prev, arrivalMsg]);
+  }, [arrivalMsg]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behaviour: "smooth" });
+  }, [messages]);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
 
   return (
     <>
@@ -58,26 +83,28 @@ const ChatContainer = ({ currentChat, currentUser }) => {
             <div className="username">
               {currentChat ? currentChat.username : ""}
             </div>
-            <div className="logoutBtn" onClick={handleLogout}>Logout</div>
+            <div className="logoutBtn" onClick={handleLogout}>
+              Logout
+            </div>
           </div>
           <div className="chat-messages">
-        {messages.map((message) => {
-          return (
-            <div >
-              <div
-                className={`message ${
-                  message.fromSelf ? "sended" : "recieved"
-                }`}
-              >
-                <div className="content ">
-                  <p>{message.message}</p>
+            {messages.map((message) => {
+              return (
+                <div ref={scrollRef} key={uuidv4()}>
+                  <div
+                    className={`message ${
+                      message.fromSelf ? "sended" : "recieved"
+                    }`}
+                  >
+                    <div className="content ">
+                      <p>{message.message}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-          <ChatInput handleSendMessage={handleSendMessage}/>
+              );
+            })}
+          </div>
+          <ChatInput handleSendMessage={handleSendMessage} />
         </div>
       )}
     </>

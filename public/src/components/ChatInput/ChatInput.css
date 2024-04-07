@@ -63,6 +63,10 @@
     margin-left: 30px;
   }
 
+  .emoji{
+    color: yellow;
+  }
+
   .chatInput{
     background-color: #16133e;
     flex: 1;
@@ -108,8 +112,8 @@
     justify-content: center;
     align-items: center;
     width: 7%;
-    height: 90%;
-    padding: 4px 0px 4px 4px;
+    height: 89%;
+    padding: 3px 0px 4px 4px;
     border-collapse: collapse;
     background-color: white;
     border-left: 0;
